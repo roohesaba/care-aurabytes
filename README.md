@@ -1,14 +1,14 @@
 # care-aurabytes
 
-## 📘 Project Description
+## Project Description
 
-## Care is a full-stack web application designed to help users manage their medication schedules and organize medical documents efficiently. The application provides pill reminders, secure storage for medical files, and advanced OCR capabilities to extract text from prescriptions and medical documents.
+Care is a full-stack web application designed to help users manage their medication schedules and organize medical documents efficiently. The application provides pill reminders, secure storage for medical files, and advanced OCR capabilities to extract text from prescriptions and medical documents.
 
-## Our goal is to simplify healthcare tracking by offering a modern, responsive, and AI-assisted platform for patients, caregivers, and individuals managing multiple prescriptions.
+Our goal is to simplify healthcare tracking by offering a modern, responsive, and AI-assisted platform for patients, caregivers, and individuals managing multiple prescriptions.
 
 ---
 
-## 👥 Team Members
+## Team Members
 -[Roohesaba](https://github.com/roohesaba)
 -[Kajal Kallekar](https://github.com/)
 -[Namir Khan](https://github.com/namirk12)
@@ -19,7 +19,7 @@
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Frontend
 - **Framework/Library:** Next.js (React)
@@ -38,18 +38,18 @@
 
 ---
 
-## 📌 Key Features
+## Key Features
 
-- ⏰ **Pill Reminders:** Schedule medication times with email or app notifications
-- 🗂️ **Organized File Storage:** Upload, view, and categorize medical records and prescriptions
-- 🔍 **OCR Text Extraction:** Extract and display text from scanned prescriptions or images
-- 🔐 **User Authentication:** Secure login and access management via NextAuth
-- ☁️ **Cloud Storage:** Store medical files safely using Firebase
-- 📱 **Responsive UI:** Built with Tailwind CSS and accessible ShadCN components
+- **Pill Reminders:** Schedule medication times with email or app notifications
+- **Organized File Storage:** Upload, view, and categorize medical records and prescriptions
+- **OCR Text Extraction:** Extract and display text from scanned prescriptions or images
+- **User Authentication:** Secure login and access management via NextAuth
+- **Cloud Storage:** Store medical files safely using Firebase
+- **Responsive UI:** Built with Tailwind CSS and accessible ShadCN components
 
 ---
 
-## 🚧 Project Status
+## Project Status
 
 > Initial setup and planning phase. Tech stack defined. Development to begin shortly.
 
