@@ -10,10 +10,10 @@ Our goal is to simplify healthcare tracking by offering a modern, responsive, an
 
 ## Team Members
 -[Roohesaba](https://github.com/roohesaba)
--[Kajal Kallekar](https://github.com/)
+-[Kajal Kallekar](https://github.com/kajal-kallekar)
 -[Namir Khan](https://github.com/namirk12)
 -[Zaki Shaikh](https://github.com/shaikhzaki20)
--[Ramchandra Gawas](https://github.com/)
+-[Ramchandra Gawas](https://github.com/Ramchandra11G)
 
 > Team: **Aura Bytes**
 
