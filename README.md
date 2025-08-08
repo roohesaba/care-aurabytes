@@ -12,7 +12,7 @@ Our goal is to simplify healthcare tracking by offering a modern, responsive, an
 -[Roohesaba](https://github.com/roohesaba)
 -[Kajal Kallekar](https://github.com/)
 -[Namir Khan](https://github.com/namirk12)
--[Zaki Shaikh](https://github.com/)
+-[Zaki Shaikh](https://github.com/shaikhzaki20)
 -[Ramchandra Gawas](https://github.com/)
 
 > Team: **Aura Bytes**
