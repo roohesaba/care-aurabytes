@@ -1,152 +1,188 @@
-* Important Endpoints
+# API_CONTRACT.md – Care App
 
-  1)Medications
-  
-1.1)Create Medication (Quick Setup)
-       Feature: Create medication & schedule in one step
+This document defines the "contract" between the frontend and backend for the Care App. It is the single source of truth for all API communication.
 
-       Method: POST
+---
 
-       Path: /api/v1/medications/quick-setup
+## Features & Endpoints
 
-       Request Body:
+---
 
-       json
-       {
-         "name": "Metformin",
-         "type": "tablet",
-         "strength": "500 mg",
-         "dosage": { "label": "1 tablet" },
-         "frequency": { "type": "twice_daily", "times": ["08:00","20:00"] },
-         "start_date": "2025-08-10"
-       }
-       Success: { "data": { "medication": { }, "schedule": { } } }
+### Authentication
 
-1.2)List Medications
-       Method: GET
+#### 1. User Registration
+- **HTTP Method:** `POST`
+- **Endpoint Path:** `/api/auth/register`
+- **Description:** Registers a new user.
+- **Request Body:**
+```json
+{
+  "name": "John Doe",
+  "email": "john@example.com",
+  "password": "securepassword"
+}
+```
+- **Success Response (200 OK):**
+```json
+{
+  "message": "User registered successfully",
+  "userId": "abc123"
+}
+```
+- **Error Responses:**
+```json
+{
+  "error": "Email already exists"
+}
+```
 
-       Path: /api/v1/medications
+#### 2. User Login
+- **HTTP Method:** `POST`
+- **Endpoint Path:** `/api/auth/login`
+- **Description:** Authenticates user and returns token.
+- **Request Body:**
+```json
+{
+  "email": "john@example.com",
+  "password": "securepassword"
+}
+```
+- **Success Response:**
+```json
+{
+  "token": "jwt.token.string",
+  "userId": "abc123"
+}
+```
 
-       Success: { "data": [ ], "meta": { "total": 2 } }
+#### 3. User Logout
+- **HTTP Method:** `POST`
+- **Endpoint Path:** `/api/auth/logout`
+- **Description:** Invalidates user session/token.
+- **Success Response:**
+```json
+{ "message": "Logged out successfully" }
+```
 
-1.3)Delete Medication
-       Method: DELETE
+---
 
-       Path: /api/v1/medications/:medId
+### Dashboard
 
-       Success: { "data": { "deleted": true } }
+#### 4. Fetch Dashboard Overview
+- **HTTP Method:** `GET`
+- **Endpoint Path:** `/api/dashboard`
+- **Description:** Retrieves latest documents, upcoming reminders, and health timeline preview.
+- **Success Response:**
+```json
+{
+  "recentDocuments": [...],
+  "upcomingReminders": [...],
+  "timelinePreview": [...]
+}
+```
 
+---
 
-2)Reminder Schedules
+### Documents
 
-2.1)Create Schedule
-       Method: POST
+#### 5. Upload Document (with OCR)
+- **HTTP Method:** `POST`
+- **Endpoint Path:** `/api/documents/upload`
+- **Description:** Uploads a document to storage and processes OCR for metadata extraction.
+- **Request Body (Multipart):**
+```
+file: PDF/Image
+```
+- **Success Response:**
+```json
+{
+  "documentId": "doc123",
+  "category": "Prescription",
+  "metadata": {
+    "doctorName": "Dr. Smith",
+    "date": "2025-08-10",
+    "diagnosis": "Flu",
+    "prescription": ["Medicine A", "Medicine B"]
+  }
+}
+```
 
-       Path: /api/v1/medications/:medId/schedules
+#### 6. Get Document Details
+- **HTTP Method:** `GET`
+- **Endpoint Path:** `/api/documents/:id`
+- **Description:** Retrieves metadata and file URL for a specific document.
 
-       Request Body:
+#### 7. Search & Filter Documents
+- **HTTP Method:** `GET`
+- **Endpoint Path:** `/api/documents/search?query=flu&category=Prescription`
+- **Description:** Searches documents by keywords, doctor, category, or tags.
 
-       json
-       {
-         "dosage": { "label": "1 tablet" },
-         "frequency": { "type": "every_n_hours", "every_n_hours": 8 },
-         "start_date": "2025-08-10"
-       }
-       Success: { "data": { } }
+---
 
-2.2)List Upcoming Doses
-       Method: GET
+### Reminders
 
-       Path: /api/v1/doses/upcoming
+#### 8. Create Reminder
+- **HTTP Method:** `POST`
+- **Endpoint Path:** `/api/reminders`
+- **Request Body:**
+```json
+{
+  "documentId": "doc123",
+  "medicine": "Paracetamol",
+  "time": "2025-08-10T09:00:00Z",
+  "repeat": "daily"
+}
+```
 
-       Success: { "data": [ ] }
+#### 9. Get All Reminders
+- **HTTP Method:** `GET`
+- **Endpoint Path:** `/api/reminders`
 
+#### 10. Delete Reminder
+- **HTTP Method:** `DELETE`
+- **Endpoint Path:** `/api/reminders/:id`
 
-3)Health Checkups
+---
 
-3.1)Create Checkup
-       Method: POST
+### QR Code
 
-       Path: /api/v1/checkups
+#### 11. Generate QR Code for Document
+- **HTTP Method:** `POST`
+- **Endpoint Path:** `/api/documents/:id/qr`
+- **Description:** Generates a QR code for a document’s secure view-only link.
+- **Success Response:**
+```json
+{
+  "qrCodeUrl": "https://storage.careapp.com/qrcodes/doc123.png"
+}
+```
 
-       Request Body:
+---
 
-       json
-       {
-         "type": "blood_test",
-         "title": "Quarterly Blood Test",
-         "scheduled_for": "2025-09-01T04:00:00Z"
-       }
-       Success: { "data": { } }
+### Profile & Settings
 
-3.2)List Checkups
-       Method: GET
+#### 12. Get Profile
+- **HTTP Method:** `GET`
+- **Endpoint Path:** `/api/profile`
 
-       Path: /api/v1/checkups
+#### 13. Update Profile
+- **HTTP Method:** `PUT`
+- **Endpoint Path:** `/api/profile`
+- **Request Body:**
+```json
+{
+  "name": "John Doe",
+  "notificationsEnabled": true,
+  "privacy": "private"
+}
+```
 
-       Success: { "data": [ ] }
+---
 
+### Export Data
 
-4)Prescription Scanning
-
-4.1)Upload Prescription
-       Method: POST
-
-       Path: /api/v1/prescriptions
-
-       Headers: Content-Type: multipart/form-data
-
-       Form Data: file (image/pdf)
-
-       Success: { "data": { "id": "p1", "status": "processing" } }
-
-4.2)Get Parsed Prescription
-       Method: GET
-
-       Path: /api/v1/prescriptions/:prescriptionId
-
-       Success: { "data": { "items": [ ] } }
-
-4.3)Confirm Prescription
-       Method: POST
-
-       Path: /api/v1/prescriptions/:prescriptionId/confirm
-
-       Request Body:
-       json
-        {
-         "selections": [
-           {
-             "name": "Amoxicillin",
-             "type": "capsule",
-             "strength": "500 mg",
-             "frequency": { "type": "thrice_daily", "times": ["08:00","14:00","20:00"] }
-           }
-         ]
-      }
-
-       Success: { "data": { "created": [ ] } }
-
-
-5)Notifications
-
-5.1)List Notifications
-       Method: GET
-
-      Path: /api/v1/notifications
-
-       Success: { "data": [ ] }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#### 14. Download Full Medical History
+- **HTTP Method:** `GET`
+- **Endpoint Path:** `/api/documents/export`
+- **Description:** Returns a ZIP/PDF of all documents and metadata.
+```
