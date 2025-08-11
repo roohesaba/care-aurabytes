@@ -176,6 +176,13 @@ file: PDF/Image
   "privacy": "private"
 }
 ```
+### Export Data
+
+#### 14. Download Full Medical History
+- **HTTP Method:** `GET`
+- **Endpoint Path:** `/api/documents/export`
+- **Description:** Returns a ZIP/PDF of all documents and metadata.
+```
 
 ---
 ---
