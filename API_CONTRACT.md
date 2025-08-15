@@ -1,4 +1,4 @@
-# API_CONTRACT.md – Care App
+npm# API_CONTRACT.md – Care App
 
 This document defines the "contract" between the frontend and backend for the Care App. It is the single source of truth for all API communication.
 
